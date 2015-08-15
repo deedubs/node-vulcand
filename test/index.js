@@ -125,11 +125,76 @@ describe('Vulcand', function () {
         });
     });
 
-    it('should be able to remove a host');
+    it('should be able to remove a host', function (done) {
 
-    it('should be able to remove a backend');
+        nock('http://127.0.0.1:1234')
+            .delete('/v2/hosts/deedubs.com')
+            .reply(200);
 
-    it('should be able to remove a frontend');
+        var payload = {
+            hostname: 'deedubs.com'
+        }
 
-    it('should be able to remove a server');
+        vulcand.removeHost(payload, function (err, response, body) {
+
+            expect(err).to.eql(null);
+
+            done();
+        });
+    });
+
+    it('should be able to remove a backend', function(done) {
+
+        nock('http://127.0.0.1:1234')
+            .delete('/v2/backends/deedubs.com')
+            .reply(200);
+
+        var payload = {
+            name: 'deedubs.com'
+        }
+
+        vulcand.removeBackend(payload, function (err, response, body) {
+
+            expect(err).to.eql(null);
+
+            done();
+        });
+    });
+
+    it('should be able to remove a frontend', function(done) {
+
+        nock('http://127.0.0.1:1234')
+            .delete('/v2/frontends/deedubs.com')
+            .reply(200);
+
+        var payload = {
+            name: 'deedubs.com'
+        }
+
+        vulcand.removeFrontend(payload, function (err, response, body) {
+
+            expect(err).to.eql(null);
+
+            done();
+        });
+    });
+
+    it('should be able to remove a server', function(done) {
+
+        nock('http://127.0.0.1:1234')
+            .delete('/v2/backends/deedubs.com/servers/deedubs.com@galvatron')
+            .reply(200);
+
+        var payload = {
+            name: 'deedubs.com@galvatron',
+            backend: 'deedubs.com'
+        }
+
+        vulcand.removeServer(payload, function (err, response, body) {
+
+            expect(err).to.eql(null);
+
+            done();
+        });
+    });
 });
