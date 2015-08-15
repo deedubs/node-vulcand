@@ -95,7 +95,41 @@ describe('Vulcand', function () {
         });
     });
 
-    it('should be able to add a new server');
+    it('should be able to add a new server', function (done) {
+
+        nock('http://127.0.0.1:1234')
+            .post('/v1/upstreams/deedubs.com/endpoints',{
+                Server: {
+                    Id: 'deedubs.com@galvatron',
+                    Url: 'http://deedubs.internal:9000'
+                }
+            })
+            .reply(201, {
+                "Id": 'deedubs.com@galvatron',
+                "Url": 'http://deedubs.internal:9000'
+            });
+
+        var payload = {
+            name: 'deedubs.com@galvatron',
+            url: 'http://deedubs.internal:9000',
+            backend: 'deedubs.com'
+        }
+
+        vulcand.addServer(payload, function (err, response, body) {
+
+            expect(err).to.eql(null);
+
+            expect(body.Id).to.eql('deedubs.com@galvatron');
+
+            done();
+        });
+    });
+
+    it('should be able to remove a host');
+
+    it('should be able to remove a backend');
+
+    it('should be able to remove a frontend');
 
     it('should be able to remove a server');
 });
