@@ -1,0 +1,32 @@
+{
+  "name": "vulcand",
+  "version": "0.1.0",
+  "description": "Vulcand API client for node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deedubs/node-vulcand.git"
+  },
+  "keywords": [
+    "vulcand",
+    "vulcandproxy",
+    "proxy"
+  ],
+  "author": "Dan Williams <dan@ma.ssive.co> (http://deedubs.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deedubs/node-vulcand/issues"
+  },
+  "homepage": "https://github.com/deedubs/node-vulcand#readme",
+  "dependencies": {
+    "request": "^2.60.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "nock": "^2.10.0"
+  }
+}
