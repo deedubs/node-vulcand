@@ -98,7 +98,7 @@ describe('Vulcand', function () {
     it('should be able to add a new server', function (done) {
 
         nock('http://127.0.0.1:1234')
-            .post('/v1/upstreams/deedubs.com/endpoints',{
+            .post('/v2/backends/deedubs.com/servers',{
                 Server: {
                     Id: 'deedubs.com@galvatron',
                     Url: 'http://deedubs.internal:9000'
