@@ -62,7 +62,7 @@ describe('Vulcand', function () {
     it('should be able to add a new frontend', function (done) {
 
         nock('http://127.0.0.1:1234')
-            .post('/v1/hosts/deedubs.com/frontends',{
+            .post('/v2/frontends',{
                 Frontend: {
                     Id: 'deedubs.com-widgets',
                     Route: 'PathRegexp(\'/widgets.*\')',
