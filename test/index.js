@@ -57,7 +57,60 @@ describe('Vulcand', function () {
 
             done();
         });
-    })
+    });
+
+    it('should be able to list frontends', function (done) {
+
+        nock('http://127.0.0.1:1234')
+            .get('/v2/frontends')
+            .reply(200, {
+                Frontends: [
+                    {
+                        Id: "api.demo.com-bean",
+                        BackendId: "backend1"
+                    }, {
+                        Id: "api.demo.com-auth",
+                        BackendId: "backend2"
+                    }
+
+                ]
+            });
+
+        vulcand.getFrontends(function (err, frontends) {
+
+            expect(err).to.equal(null);
+
+            expect(frontends).to.be.an('array').to.have.length(2);
+
+            done();
+        });
+    });
+
+    it('should be able to list frontends scoped to a backend', function (done) {
+        nock('http://127.0.0.1:1234')
+            .get('/v2/frontends')
+            .reply(200, {
+                Frontends: [
+                    {
+                        Id: "api.demo.com-bean",
+                        BackendId: "backend1"
+                    }, {
+                        Id: "api.demo.com-auth",
+                        BackendId: "backend2"
+                    }
+
+                ]
+            });
+
+        vulcand.getFrontends({backend: 'backend2'}, function (err, frontends) {
+
+            expect(err).to.equal(null);
+
+            expect(frontends).to.be.an('array').to.have.length(1);
+
+            done();
+        });
+    });
 
     it('should be able to add a new frontend', function (done) {
 
